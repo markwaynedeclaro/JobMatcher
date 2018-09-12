@@ -11,11 +11,13 @@ import java.util.stream.Collectors;
 @Component
 public class MatcherService {
 
+	private final String workersURL = "http://test.swipejobs.com/api/workers";
+	private final String jobsURL = "http://test.swipejobs.com/api/jobs";
 	
     public Worker getWorker(final int id) {
     	
     	RestTemplate restTemplate = new RestTemplate();
-    	Worker[] workers = restTemplate.getForObject("http://test.swipejobs.com/api/workers", Worker[].class);
+    	Worker[] workers = restTemplate.getForObject(workersURL, Worker[].class);
     	
         return Arrays.stream(workers).filter(w->w.getUserId()==id).findFirst().get();
     }
@@ -23,7 +25,7 @@ public class MatcherService {
     public List<Job> getMatchedJobs(final Worker worker) {
     	
     	RestTemplate restTemplate = new RestTemplate();
-    	Job[] jobs = restTemplate.getForObject("http://test.swipejobs.com/api/jobs", Job[].class);
+    	Job[] jobs = restTemplate.getForObject(jobsURL, Job[].class);
     	
     	Comparator<Job> byMatchedCertificate = (c1, c2) -> Integer.compare(
                 c2.getRequiredCertificates().length, c1.getRequiredCertificates().length);
@@ -41,8 +43,5 @@ public class MatcherService {
     	
         return matchedJobs;
     }
-    
-    
-
-    
+     
 }
