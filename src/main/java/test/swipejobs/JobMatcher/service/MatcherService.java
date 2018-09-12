@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 @Component
 public class MatcherService {
 
-	private final String workersURL = "http://test.swipejobs.com/api/workers";
-	private final String jobsURL = "http://test.swipejobs.com/api/jobs";
+    private final String workersURL = "http://test.swipejobs.com/api/workers";
+    private final String jobsURL = "http://test.swipejobs.com/api/jobs";
 	
     public Worker getWorker(final int id) {
     	
